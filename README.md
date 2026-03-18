@@ -6,6 +6,8 @@ Users are also able to `Delete` entries from their daily log, allowing them to c
 The application integrates with the Open Food Facts API to Read and display nutritional data. The data is also used to `Create` backend data which is managed on Airtable. Through the integration with the `Open Food Facts API` and `Airtable`, the application is able to perform `CRUD` operations. (specifically `Create`, `Read` and `Delete`)
 The Nutrition tracker is built to demonstrate key web development concepts such as `API integration`, `client-side data management`, and `interactive user interfaces`.
 
+![An image of the add foods page](./src/assets/img/2-add-page.png)
+
 ## User Stories
 ### Searching for Food and Viewing Nutritional Data
 As a user :
