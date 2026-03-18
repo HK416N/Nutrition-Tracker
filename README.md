@@ -62,3 +62,6 @@ As a user:
 - I want to see an error message if the app fails to fetch data
 - I should not be able to click the search button if the input field is empty
 - I want the application to show a loading indicator while data is being fetched from the API
+
+## Wireframes
+View lo-fi wireframes here: [wireframes.md](./wireframes.md)
