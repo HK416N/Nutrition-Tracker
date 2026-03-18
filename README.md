@@ -30,3 +30,35 @@ As a user:
 As a user:
 - I want a form to `edit` food entries to correct any incorrect nutritional values, food names or portion sizes.
 - I want the edit form to be `pre-filled` with the current food’s information so that I can easily and quickly modify the entry
+
+## Positive User Stories
+### Searching for Food and Viewing Nutritional Data
+As a user :
+- I want to enter the name of a food into a search bar to find food items so I can track nutritional information.
+- I want to see a list of food results after searching so that I can choose the correct food item.
+- I want to see a detailed breakdown of nutritional data (calories, protein, carbs, fats and caffeine(optional)) for each food item.
+### Adding Food to a List/Tracker
+As a user :
+- I want to add a selected food item to a list/tracker to track my daily progress.
+- I want the tracked foods to show up in a list so I can review my logged foods.
+### Viewing Tracked Foods
+As a user:
+- I want to be able to click each listed food item and see the nutritional value so I can easily compare them.
+### Deleting Tracked Food Entries
+As a user:
+- I want to delete a food entry from my tracker so that I can remove mistakenly added foods.
+### Navigation
+As a user:
+- I want to navigate between the search and tracker page using simple navigation links so that I can easily move through the app.
+- I want the navigation to always be visible so that I can quickly navigate to different pages within the app.
+### Editing Tracked Foods Entries (STRETCH)
+As a user:
+- I want a form to edit food entries to correct any incorrect nutritional values, food names or portion sizes.
+- I want the edit form to be pre-filled with the current food’s information so that I can easily and quickly modify the entry
+
+## Negative User Stories
+As a user:
+- I want to see a message when no food matches are found
+- I want to see an error message if the app fails to fetch data
+- I should not be able to click the search button if the input field is empty
+- I want the application to show a loading indicator while data is being fetched from the API
