@@ -18,7 +18,7 @@ Must include:
 5. **API/Airtable:** Fetch from `Open Food Facts API`. Carry out `POST` & `DELETE` on Airtable
 6. **CRUD:** The app must include `READ` and at least one other CUD functionality.
 
-## Positive User Stories
+## User Stories
 ### Searching for Food and Viewing Nutritional Data
 As a user :
 - I want to enter the name of a food into a search bar to find food items so I can track nutritional information.
