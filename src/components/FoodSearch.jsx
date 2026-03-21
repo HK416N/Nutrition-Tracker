@@ -1,41 +1,27 @@
 import { useState } from "react";
-import { getFoodSearch } from "../services/foodService";
 
-const FoodSearch = () => {
+const FoodSearch = ({fetchData}) => {
     const [query, setQuery] = useState("");
     
-    // const [food, setFood] = useState("");
-
-    // const handleChange = (event) => {
-    //     setFood(event.target.value);
-    //     console.log(food);
-    // }
-
-    // return (
-    //     <label>
-    //         <input type="text" value={food} onChange={handleChange}></input>
-    //     </label>
-    // )
-
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const data = await getFoodSearch(query);
+        fetchData(query); //callback (lift state) run handleSearch in AddPage.jsx
 
-        console.log("Submit Query") //!REMEMBER TO REMOVE
-
-        // setFoods(data);
+        // console.log("Submit Query") //!REMEMBER TO REMOVE
     }
+
     return(
-    <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
         <input type="text"
             value={query}
-            onChange={(event) => setQuery(event.target.value)
-            }>
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search for food...">
         </input>
         <button type="submit">Search</button>
     </form>            
     )
-
+    
 }
 
 export default FoodSearch;

@@ -1,3 +1,5 @@
+
+
 const FoodCard = ({ item, onAdd }) => {
 
     const name = item.product_name ?? "Name Unavailable";
@@ -27,7 +29,8 @@ const FoodCard = ({ item, onAdd }) => {
                 </div>
             </div>
 
-            {/* lift state for parent to display name in the last added message*/}
+            {/* lift state for parent to display name in the
+             last added message*/}
             <button onClick={() => onAdd(name)}> 
                 Add
             </button>
