@@ -8,7 +8,7 @@ export const getFoodSearch = async (query) => { //remember to add await
 
 
 // //https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-// async function getData() {
+// export const getFoodSearch = async (query) => {
 //   const url = "https://example.org/products.json";
 //   try {
 //     const response = await fetch(url);

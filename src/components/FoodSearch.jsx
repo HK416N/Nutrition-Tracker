@@ -15,6 +15,9 @@ const FoodSearch = ({fetchData}) => {
         <form onSubmit={handleSubmit}>
         <input type="text"
             value={query}
+
+            //! if theres time: check debounce in react 
+            //! https://www.developerway.com/posts/debouncing-in-react
             onChange={(event) => setQuery(event.target.value)}
             placeholder="Search for food...">
         </input>

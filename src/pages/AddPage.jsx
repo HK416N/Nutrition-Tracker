@@ -4,7 +4,7 @@ import FoodCard from "../components/FoodCard";
 import FoodSearch from "../components/FoodSearch";
 
 
-const AddPage = () => {
+const AddPage = ({onAddTrackedFood}) => {
     // const [query, setQuery] = useState(""); //! moved to FoodSearch
     const [foods, setFoods] = useState([]); //array of results
     const [lastAdded, setLastAdded] = useState("");
@@ -17,15 +17,20 @@ const AddPage = () => {
         setFoods(data);
     } 
 
-    const handleLastAddedMessage = (foodName) => {
-        setLastAdded(foodName);
+    //change handleLastAddedMessage to handleLastAdded so it can be used to update onAddTrackedFood to lift state to APp 
+    // As well as setLastAdded for the last added message
+    const handleLastAdded = (foodItem) => {
+
+        //liftstate
+        onAddTrackedFood(foodItem);
+        // Message
+        setLastAdded(foodItem.product_name);
     }
     
     return (
         <div>
             <FoodSearch fetchData={handleSearch}/>
 
-            {/* to do: last added message */}
             {
                 //! see React Conditional Rendering Logical AND operator
                 //!  https://react.dev/learn/conditional-rendering#logical-and-operator-
@@ -38,7 +43,7 @@ const AddPage = () => {
                  if not print a message to prompt user to search to begin adding */}
                 {
                     foods.length > 0 ? (foods.map((food) => (
-                        <FoodCard key={food._id} item={food} onAdd={handleLastAddedMessage}/>))
+                        <FoodCard key={food._id} item={food} onAdd={handleLastAdded}/>))
                     ) : (
                         <p>Search for a food to begin.</p>
                     )

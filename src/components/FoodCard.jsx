@@ -31,7 +31,7 @@ const FoodCard = ({ item, onAdd }) => {
 
             {/* lift state for parent to display name in the
              last added message*/}
-            <button onClick={() => onAdd(name)}> 
+            <button onClick={() => onAdd(item)}> 
                 Add
             </button>
         </div>

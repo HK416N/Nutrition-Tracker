@@ -1,5 +1,6 @@
 // src/App.jsx
 
+import { useState } from "react";
 import { Routes, Route } from "react-router";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
@@ -8,6 +9,19 @@ import TrackedFoodPage from "./pages/TrackedFoodPage";
 import NotFound from "./pages/NotFound";
 
 const App = () => {
+
+  //state to be shared between: App -> AddPage -> FoodCard and App -> TrackedFoodPage
+  const [trackedFoods,setTrackedFoods] = useState([]); 
+  
+  //? handleAddTrackedFoods is passed down to FoodCard via prop drilling and when callback-ed,
+  //?  will setTrackedFoods which is then passed as props to TrackedFoodPage to be displayed.
+  const handleAddTrackedFood = (foodItem) => {
+
+    //use spread operator to keep old food items while adding the new tracked food
+    setTrackedFoods([...trackedFoods, foodItem]); 
+    console.log(trackedFoods);
+  }
+
   return (
     <>
       <h1>Nuitrition Tracker</h1>
@@ -15,8 +29,13 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/add" element={<AddPage />} />
-        <Route path="/tracked" element={<TrackedFoodPage />} />
+        {/*
+        pass handleAddTrackedFood to AddPage as props where FoodCard lifts "name" state to.
+        The "name" state will be handled in AddPage and lifted back up to App for it 
+        to be passed as props to TrackedFoodPage 
+        */}
+        <Route path="/add" element={<AddPage onAddTrackedFood={handleAddTrackedFood}/>} />
+        <Route path="/tracked" element={<TrackedFoodPage trackedFoods={trackedFoods}/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>
