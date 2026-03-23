@@ -1,4 +1,4 @@
-const TrackedFoodPage = ({ trackedFoods }) => {
+const TrackedFoodPage = ({ trackedFoods, onDelete }) => {
 
     return (
         <div>
@@ -8,13 +8,27 @@ const TrackedFoodPage = ({ trackedFoods }) => {
 
                 {trackedFoods.length > 0 ? (
                     //! replace this portion with js for the trackedFoods.map
-                    <ul>
+                    <div className="tracked-foods-list">
                         {
-                            trackedFoods.map((foods) => (
-                                <li>{foods.product_name}</li>
+                            trackedFoods.map((food) => (
+                                <div key={food.timestamp} className="TrackedFoodList">
+                                    <dl>
+                                        {/* tracked foods needs to match my app naming convention 
+                                        while AddTrackedFoods needs to match the Airtable naming convention*/}
+                                        <dt>{food.product_name}</dt>
+                                        <dd> Calories: {food.nutriments["energy-kcal_serving"]}</dd>
+                                        <dd> Carbs: {food.nutriments.carbohydrates_serving}</dd>
+                                        <dd> Proteins: {food.nutriments.proteins_serving}</dd>
+                                        <dd> Fats: {food.nutriments.fat_serving}</dd>
+                                    </dl>
+
+                                    <button onClick={() => onDelete(food.id)}>
+                                        Delete
+                                    </button>
+                                </div>
                             ))
                         }
-                    </ul>
+                    </div>
                 ) : (
                     <p>No foods tracked. Click "Add" to begin logging.</p>
                 )}
