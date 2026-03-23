@@ -6,8 +6,8 @@ const FoodCard = ({ item, onAdd }) => {
     const image = item.image_url ?? "Image Unavaialble";
     const calories = item.nutriments?.["energy-kcal_serving"] ?? "Unavailable"; //the app crashes cause one of the energy-kcal_serving is undefined. To avoid this, use optional chaining 
     const carbs = item.nutriments?.["carbohydrates_serving"] ?? "Unavailable"; // || returns unavailable if the value is set to 0, use nullish coalescing ?? which only triggers if value is null or undefined
-    const protein = item.nutriments?.["proteins_serving"] ?? "Unavailable";
-    const fat = item.nutriments?.["fat_serving"] ?? "Unavailable";
+    const proteins = item.nutriments?.["proteins_serving"] ?? "Unavailable"; //have to use [] instead of . because of the energy-kcal just continued using [] after 
+    const fats = item.nutriments?.["fat_serving"] ?? "Unavailable";
 
 
     return (
@@ -22,10 +22,10 @@ const FoodCard = ({ item, onAdd }) => {
                     <strong>Carbs: {carbs} </strong>
                 </div>
                 <div>
-                    <strong>Protein: {protein} </strong>
+                    <strong>Proteins: {proteins} </strong>
                 </div>
                 <div>
-                    <strong>Fat: {fat} </strong>
+                    <strong>Fats: {fats} </strong>
                 </div>
             </div>
 
