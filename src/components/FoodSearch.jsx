@@ -13,7 +13,7 @@ const FoodSearch = ({fetchData}) => {
 
     return(
         <form onSubmit={handleSubmit}>
-        <input type="text"
+        <input type="search"
             value={query}
 
             //! if theres time: check debounce in react 

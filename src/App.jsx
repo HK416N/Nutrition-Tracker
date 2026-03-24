@@ -11,6 +11,8 @@ import { getTrackedFood, addTrackedFood, deleteTrackedFood } from "./services/fo
 
 const App = () => {
 
+  const [trackedFoods, setTrackedFoods] = useState([]);
+  
   useEffect(() => {
     const fetchTrackedFoods = async () => {
       const trackedFoodsData = await getTrackedFood();
@@ -26,7 +28,6 @@ const App = () => {
 
 
   //state to be shared between: App -> AddPage -> FoodCard and App -> TrackedFoodPage
-  const [trackedFoods, setTrackedFoods] = useState([]);
 
   //? handleAddTrackedFoods is passed down to FoodCard via prop drilling and when callback-ed,
   //?  will setTrackedFoods which is then passed as props to TrackedFoodPage to be displayed.
