@@ -4,8 +4,8 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
-import AddPage from "./pages/AddPage";
-import TrackedFoodPage from "./pages/TrackedFoodPage";
+import AddPage from "./pages/FoodSearchPage";
+import NutritionLogPage from "./pages/NutritionLogPage";
 import NotFound from "./pages/NotFound";
 import { getTrackedFood, addTrackedFood, deleteTrackedFood } from "./services/foodService";
 
@@ -63,15 +63,15 @@ const App = () => {
         to be passed as props to TrackedFoodPage 
         */}
         <Route
-          path="/add"
+          path="/foods"
           element={<AddPage
             onAddTrackedFood={handleAddTrackedFood}
           />
           }
         />
         <Route
-          path="/tracked"
-          element={<TrackedFoodPage
+          path="/logs"
+          element={<NutritionLogPage
             trackedFoods={trackedFoods}
             onDelete={handleDeleteTrackedFoods}
           />

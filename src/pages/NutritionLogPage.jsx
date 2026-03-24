@@ -1,4 +1,6 @@
-const TrackedFoodPage = ({ trackedFoods, onDelete }) => {
+//rename TrackedFoodPage to NutritionLogPage
+
+const NutritionLogPage = ({ trackedFoods, onDelete }) => {
 
     return (
         <div>
@@ -48,4 +50,4 @@ const TrackedFoodPage = ({ trackedFoods, onDelete }) => {
     )
 }
 
-export default TrackedFoodPage;
+export default NutritionLogPage;
