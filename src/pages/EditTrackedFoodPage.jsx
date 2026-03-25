@@ -11,7 +11,7 @@ const intitalState = {
             "timestamp": "",
 }
 
-export editTrackedFoods = () => {
-    const [formData, setFormData] = useState(initialState);
-    const {}
-}
+// export editTrackedFoods = () => {
+//     const [formData, setFormData] = useState(initialState);
+//     const {}
+// }

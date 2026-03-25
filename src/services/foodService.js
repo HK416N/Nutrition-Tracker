@@ -225,3 +225,9 @@ export const getFoodSearch = async (query) => {
     return []; //to prevent map from crashing the page
   }
 }
+
+
+//! temp
+console.log("All Env Vars:", import.meta.env);
+console.log("Specific Airtable URL:", import.meta.env.VITE_AIRTABLE_BASE_URL);
+console.log("Specific Airtable URL:", import.meta.env.VITE_FOOD_SEARCH_BASE_URL);
