@@ -213,7 +213,16 @@ export const deleteTrackedFood = async (timestamp) => {
 export const getFoodSearch = async (query) => {
   const url = `${OPEN_FOOD_FACTS_BASE_URL}?search_terms=${query}&search_simple=1&action=process&json=1&fields=product_name,nutriments,_id,image_url&app_name=NutritionTrackerApp&app_version=1.0`
   try {
-    const response = await fetch(url);
+    const response = await fetch(url,
+      {
+      method: 'GET',
+      headers: {
+        //gemini suggestion to have header here - my fetch request is being blocked by open food facts api
+        'User-Agent': 'NutritionTrackerApp/1.0 (hansdarrelkoh@gmail.com)',
+        'Accept': 'application/json'
+      }
+    });
+
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }

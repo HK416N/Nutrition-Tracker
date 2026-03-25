@@ -21,17 +21,14 @@ export default defineConfig({
       '/openfoodapi': {
         target: 'https://world.openfoodfacts.org',
         changeOrigin: true,
-        headers: {
-          'User-Agent': 'NutritionTrackerApp/1.0 (hansdarrelkoh@gmail.com)',
-          'Accept': 'application/json',
-          'Accept-Language': 'en-US,en;q=0.9',
-        },
+        
         rewrite: (path) => path.replace(/^\/openfoodapi/, ''),
         configure: (proxy, _options) => {
           proxy.on('error', (err, _req, _res) => {
             console.log('Proxy Error:', err);
           });
           proxy.on('proxyReq', (proxyReq, req, _res) => {
+          
             console.log('Proxying Request:', req.method, req.url, '->', 'https://world.openfoodfacts.org' + proxyReq.path);
           });
           proxy.on('proxyRes', (proxyRes, req, _res) => {
