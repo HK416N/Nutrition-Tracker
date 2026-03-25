@@ -7,7 +7,7 @@ const OPEN_FOOD_FACTS_BASE_URL = import.meta.env.VITE_FOOD_SEARCH_BASE_URL;
 
 //just added "Tracker" to target specific table but keep it 
 // separate from base in case I want to do something else with the BASE_URL
-const AIRTABLE_URL = `${AIRTABLE_BASE_URL}logs/`
+const AIRTABLE_URL = `${AIRTABLE_BASE_URL}Tracker/`
 
 
 
