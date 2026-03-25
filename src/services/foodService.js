@@ -13,8 +13,8 @@ const AIRTABLE_URL = `${AIRTABLE_BASE_URL}Tracker/`
 
 // extracted header from the Airtable functions for future use
 const airtableHeader = {
-    Authorization: `Bearer ${AIRTABLE_KEY}`,
-    'Content-Type': 'application/json'
+  Authorization: `Bearer ${AIRTABLE_KEY}`,
+  'Content-Type': 'application/json'
 }
 
 //? GET tracked foods:
@@ -22,26 +22,26 @@ const airtableHeader = {
 export const getTrackedFood = async () => {
   try {
     const response = await fetch(AIRTABLE_URL, {
-        headers: airtableHeader,
+      headers: airtableHeader,
     });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
 
     const result = await response.json();
-    
+
     const trackedFoods = result.records.map(record => ({
-        id: record.id,
-        timestamp: record.fields.timestamp,
-        product_name: record.fields.product_name,
-        nutriments: {
-            "energy-kcal_serving": record.fields.calories_serving, // Match Airtable column
-            "carbohydrates_serving": record.fields.carbs_serving,
-            "proteins_serving": record.fields.protein_serving,
-            "fat_serving": record.fields.fats_serving,
-        }
+      id: record.id,
+      timestamp: record.fields.timestamp,
+      product_name: record.fields.product_name,
+      nutriments: {
+        "energy-kcal_serving": record.fields.calories_serving, // Match Airtable column
+        "carbohydrates_serving": record.fields.carbs_serving,
+        "proteins_serving": record.fields.protein_serving,
+        "fat_serving": record.fields.fats_serving,
+      }
     }))
-    
+
     return trackedFoods;
   } catch (error) {
     console.error(error.message);
@@ -69,24 +69,23 @@ export const getTrackedFood = async () => {
 //?POST tracked foods:
 
 export const addTrackedFood = async (foodItem) => {
-    const data = {
-        fields: {
-            //was mismatched, i was not sending the same key-value pairs to airtable
-            "product_name": String(foodItem.product_name), //!double check this
-            "id": String(foodItem._id || ""), 
-            "calories_serving": String(foodItem.nutriments?.["energy-kcal_serving"] ?? 0),
-            "carbs_serving": String(foodItem.nutriments?.carbohydrates_serving ?? 0),
-            "protein_serving": String(foodItem.nutriments?.proteins_serving ?? 0),
-            "fats_serving": String(foodItem.nutriments?.fat_serving ?? 0),
-            "timestamp": Number(Date.now()) 
-        }
-    };
+  const data = {
+    fields: {
+      //was mismatched, i was not sending the same key-value pairs to airtable
+      "product_name": String(foodItem.product_name), //!double check this
+      "calories_serving": String(foodItem.nutriments?.["energy-kcal_serving"] ?? 0),
+      "carbs_serving": String(foodItem.nutriments?.carbohydrates_serving ?? 0),
+      "protein_serving": String(foodItem.nutriments?.proteins_serving ?? 0),
+      "fats_serving": String(foodItem.nutriments?.fat_serving ?? 0),
+      "timestamp": Number(Date.now())
+    }
+  };
 
-    const options = {
-        method: "POST",
-        headers: airtableHeader,
-        body: JSON.stringify(data),
-    } 
+  const options = {
+    method: "POST",
+    headers: airtableHeader,
+    body: JSON.stringify(data),
+  }
 
   try {
     const response = await fetch(AIRTABLE_URL, options);
@@ -95,17 +94,17 @@ export const addTrackedFood = async (foodItem) => {
     }
 
     const result = await response.json();
-    
+
     return {
-        id: result.id,
-        timestamp: result.fields.timestamp,
-        product_name: result.fields.product_name,
-        nutriments: {
-            "energy-kcal_serving": result.fields.calories_serving, // Match Airtable column
-            "carbohydrates_serving": result.fields.carbs_serving,
-            "proteins_serving": result.fields.protein_serving,
-            "fat_serving": result.fields.fats_serving,
-        }
+      id: result.id,
+      timestamp: result.fields.timestamp,
+      product_name: result.fields.product_name,
+      nutriments: {
+        "energy-kcal_serving": result.fields.calories_serving, // Match Airtable column
+        "carbohydrates_serving": result.fields.carbs_serving,
+        "proteins_serving": result.fields.protein_serving,
+        "fat_serving": result.fields.fats_serving,
+      }
     };
   } catch (error) {
     console.error(error.message);
@@ -151,10 +150,10 @@ export const addTrackedFood = async (foodItem) => {
 //? DELETE Tracked Foods
 
 export const deleteTrackedFood = async (timestamp) => {
-    
-    const url = `${AIRTABLE_URL}${timestamp}`
 
-    try {
+  const url = `${AIRTABLE_URL}${timestamp}`
+
+  try {
     const response = await fetch(url, {
       method: "DELETE",
       headers: airtableHeader,
@@ -168,7 +167,7 @@ export const deleteTrackedFood = async (timestamp) => {
   } catch (error) {
     console.error(error.message);
   }
-    
+
 }
 
 
@@ -196,15 +195,125 @@ export const deleteTrackedFood = async (timestamp) => {
 //   }
 // }
 
+//? get one food  item for edit and details (if theres time)
+
+export const getTrackedFoodById = async (foodId) => {
+  const url = `${AIRTABLE_URL}${foodId}`
+
+  try {
+    const response = await fetch(url, {
+      headers: airtableHeader,
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const result = await response.json();
+
+    return {
+      id: result.id,
+      product_name: result.fields.product_name,
+      timestamp: result.fields.timestamp,
+      nutriments: {
+        "energy-kcal_serving": result.fields.calories_serving,
+        "carbohydrates_serving": result.fields.carbs_serving,
+        "proteins_serving": result.fields.protein_serving,
+        "fat_serving": result.fields.fats_serving,
+      }
+    }
+
+  } catch (error) {
+    console.error(error.message);
+
+  }
+}
+
+//? Edit tracked Fodos
+
+export const editTrackedFood = async (foodId, updatedData) => {
+  const url = `${AIRTABLE_URL}${foodId}`;
+
+  const data = {
+    fields: {
+      "product_name": String(updatedData.product_name),
+      "calories_serving": String(updatedData.nutriments?.["energy-kcal_serving"] ?? 0),
+      "carbs_serving": String(updatedData.nutriments?.carbohydrates_serving ?? 0),
+      "protein_serving": String(updatedData.nutriments?.proteins_serving ?? 0),
+      "fats_serving": String(updatedData.nutriments?.fat_serving ?? 0),
+      "timestamp": Number(updatedData.timestamp)
+    }
+  };
 
 
+  const options = {
+    method: "PATCH",
+    headers: airtableHeader,
+    body: JSON.stringify(data),
+  }
 
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
 
+    const result = await response.json();
+    return result;
+
+  } catch (error) {
+    console.error(error.message);
+  }
+
+}
+
+// export const addTrackedFood = async (foodItem) => {
+//   const data = {
+//     fields: {
+//       //was mismatched, i was not sending the same key-value pairs to airtable
+//       "product_name": String(foodItem.product_name), //!double check this
+//       "id": String(foodItem._id || ""),
+//       "calories_serving": String(foodItem.nutriments?.["energy-kcal_serving"] ?? 0),
+//       "carbs_serving": String(foodItem.nutriments?.carbohydrates_serving ?? 0),
+//       "protein_serving": String(foodItem.nutriments?.proteins_serving ?? 0),
+//       "fats_serving": String(foodItem.nutriments?.fat_serving ?? 0),
+//       "timestamp": Number(Date.now())
+//     }
+//   };
+
+//   const options = {
+//     method: "POST",
+//     headers: airtableHeader,
+//     body: JSON.stringify(data),
+//   }
+
+//   try {
+//     const response = await fetch(AIRTABLE_URL, options);
+//     if (!response.ok) {
+//       throw new Error(`Response status: ${response.status}`);
+//     }
+
+//     const result = await response.json();
+
+//     return {
+//       id: result.id,
+//       timestamp: result.fields.timestamp,
+//       product_name: result.fields.product_name,
+//       nutriments: {
+//         "energy-kcal_serving": result.fields.calories_serving, // Match Airtable column
+//         "carbohydrates_serving": result.fields.carbs_serving,
+//         "proteins_serving": result.fields.protein_serving,
+//         "fat_serving": result.fields.fats_serving,
+//       }
+//     };
+//   } catch (error) {
+//     console.error(error.message);
+//   }
+// }
 
 //? Food Search
 
 // export const getFoodSearch = async (query) => { //remember to add await
-    
+
 //     return exampleData.products; //pass exammple data from exampleData.js to FoodCard for testing
 // }
 
@@ -215,13 +324,13 @@ export const getFoodSearch = async (query) => {
   try {
     const response = await fetch(url,
       {
-      method: 'GET',
-      headers: {
-        //gemini suggestion to have header here - my fetch request is being blocked by open food facts api
-        'User-Agent': 'NutritionTrackerApp/1.0 (hansdarrelkoh@gmail.com)',
-        'Accept': 'application/json'
-      }
-    });
+        method: 'GET',
+        headers: {
+          //gemini suggestion to have header here - my fetch request is being blocked by open food facts api
+          'User-Agent': 'NutritionTrackerApp/1.0 (hansdarrelkoh@gmail.com)',
+          'Accept': 'application/json'
+        }
+      });
 
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
@@ -237,6 +346,6 @@ export const getFoodSearch = async (query) => {
 
 
 //! temp
-console.log("All Env Vars:", import.meta.env);
-console.log("Specific Airtable URL:", import.meta.env.VITE_AIRTABLE_BASE_URL);
-console.log("Specific openfoodfacts URL:", import.meta.env.VITE_FOOD_SEARCH_BASE_URL);
+// console.log("All Env Vars:", import.meta.env);
+// console.log("Specific Airtable URL:", import.meta.env.VITE_AIRTABLE_BASE_URL);
+// console.log("Specific openfoodfacts URL:", import.meta.env.VITE_FOOD_SEARCH_BASE_URL);
