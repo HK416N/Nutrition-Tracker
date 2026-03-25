@@ -1,9 +1,9 @@
 [build]
-publish = "dist"
+  publish = "dist"
 
 [[redirects]]
   from = "/openfoodapi/*"
-  to = "https://world.openfoodfacts.org/:splat"
+  to = "https://world.openfoodfacts.org/:splat" # Updated to world
   status = 200
   force = true
 
