@@ -9,7 +9,7 @@ const NutritionLogPage = ({ trackedFoods, onDelete }) => {
             <div className="tracked-foods-list">
 
                 {trackedFoods?.length > 0 ? (
-                    //! replace this portion with js for the trackedFoods.map
+                    
                     <div className="tracked-foods-list">
                         {
                             trackedFoods.map((food) => (

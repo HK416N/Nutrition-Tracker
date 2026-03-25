@@ -7,7 +7,7 @@ const OPEN_FOOD_FACTS_BASE_URL = import.meta.env.VITE_FOOD_SEARCH_BASE_URL;
 
 //just added "Tracker" to target specific table but keep it 
 // separate from base in case I want to do something else with the BASE_URL
-const AIRTABLE_URL = `${AIRTABLE_BASE_URL}Tracker/`
+const AIRTABLE_URL = `${AIRTABLE_BASE_URL}logs/`
 
 
 
@@ -72,7 +72,7 @@ export const addTrackedFood = async (foodItem) => {
     const data = {
         fields: {
             //was mismatched, i was not sending the same key-value pairs to airtable
-            "product_name": String(foodItem.product_name), 
+            "product_name": String(foodItem.product_name), //!double check this
             "id": String(foodItem._id || ""), 
             "calories_serving": String(foodItem.nutriments?.["energy-kcal_serving"] ?? 0),
             "carbs_serving": String(foodItem.nutriments?.carbohydrates_serving ?? 0),
@@ -127,7 +127,7 @@ export const addTrackedFood = async (foodItem) => {
 //       "content-type": "application/json",
 //     },
 //     body: JSON.stringify(data),
-//   };
+//
 
 //   try {
 //     const response = await fetch(url, options);
