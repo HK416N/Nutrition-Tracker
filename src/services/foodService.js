@@ -211,7 +211,7 @@ export const deleteTrackedFood = async (timestamp) => {
 
 // //https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 export const getFoodSearch = async (query) => {
-  const url = `${OPEN_FOOD_FACTS_BASE_URL}?search_terms=${query}&search_simple=1&action=process&json=1&fields=product_name,nutriments,_id,image_url`
+  const url = `${OPEN_FOOD_FACTS_BASE_URL}/?search_terms=${query}&search_simple=1&action=process&json=1&fields=product_name,nutriments,_id,image_url`
   try {
     const response = await fetch(url);
     if (!response.ok) {
