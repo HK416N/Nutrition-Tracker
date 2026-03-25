@@ -56,7 +56,7 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<HomePage />
+          element={<HomePage trackedFoods={trackedFoods} />
           }
         />
         {/*
