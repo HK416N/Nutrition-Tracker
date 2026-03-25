@@ -2,26 +2,28 @@
 
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
+import { getTrackedFood, addTrackedFood, deleteTrackedFood } from "./services/foodService";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import AddPage from "./pages/FoodSearchPage";
 import NutritionLogPage from "./pages/NutritionLogPage";
 import NotFound from "./pages/NotFound";
-import { getTrackedFood, addTrackedFood, deleteTrackedFood } from "./services/foodService";
+import EditTrackedFood from "./components/EditTrackedFoodForm";
 
 const App = () => {
 
   const [trackedFoods, setTrackedFoods] = useState([]);
   
+  const fetchTrackedFoods = async () => {
+    const trackedFoodsData = await getTrackedFood();
+
+    setTrackedFoods(trackedFoodsData);
+
+    console.log(trackedFoodsData); //!remove
+  }
+
+  //? refactor: move fetchTrackedFoods out so it can be used for add and delete
   useEffect(() => {
-    const fetchTrackedFoods = async () => {
-      const trackedFoodsData = await getTrackedFood();
-
-      setTrackedFoods(trackedFoodsData);
-
-      console.log(trackedFoodsData);
-    }
-
     fetchTrackedFoods();
   }, [])
 
@@ -75,13 +77,20 @@ const App = () => {
             trackedFoods={trackedFoods}
             onDelete={handleDeleteTrackedFoods}
           />
-          }
+        }
         />
+          <Route
+            path="/edit/:trackedFoodId"
+            element={<EditTrackedFood 
+            onEdit={fetchTrackedFoods}/>
+            }
+          />
         <Route
           path="*"
           element={<NotFound />
           }
         />
+
       </Routes>
     </>
   )

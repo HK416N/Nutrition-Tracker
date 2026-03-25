@@ -1,4 +1,11 @@
+import { useNavigate, useParams } from "react-router";
+
+//can probably use a state to toggle between add and tracked food cards.
+
 const TrackedFoodCard = ({ trackedFoods: trackedFood, onDelete }) => {
+
+    const navigate = useNavigate();
+
     return (
         <div key={trackedFood.timestamp} className="tracked-foods-card">
             <dl>
@@ -13,7 +20,8 @@ const TrackedFoodCard = ({ trackedFoods: trackedFood, onDelete }) => {
             </dl>
 
             <div className="tracked-foods-card-buttons">
-                <button onClick={() => onDelete(trackedFood.id)}>
+                {/* navigate to edit page for that specific id */}
+                <button onClick={() => navigate(`/edit/${trackedFood.id}`)}>
                     Edit
                 </button>
                 <button onClick={() => onDelete(trackedFood.id)}>
