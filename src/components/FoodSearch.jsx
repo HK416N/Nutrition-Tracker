@@ -1,3 +1,4 @@
+import "../style/FoodSearch.css"
 import { useState } from "react";
 import { useDebouncedCallback } from "use-debounce";
 
@@ -11,18 +12,14 @@ const FoodSearch = ({ fetchData }) => {
             fetchData(value);
         },
         //delay in ms - api call made 1000ms after typing
-        1000
+        1000,
+        {leading: true},
     );
 
     const handleChange = (event) => {
         const value = event.target.value;
         setQuery(value); 
-        // unlike the example from use-debounce docs, 
-        // setQuery(value) before debounced(value) allows the search bar to 
-        // update immediately
-        //! debounced(value); //this would make the search bar a live search feature which would be nice for auto-fill or prompts
-        //! but considering my API limitations, I dont think I can use this. It was a really cool feature though. must remember
-        //! to use it in other apps.
+        //debounced(value)
     }
 
 
@@ -37,18 +34,16 @@ const FoodSearch = ({ fetchData }) => {
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <input type="search"
+        <form className="search-container" onSubmit={handleSubmit}>
+            <input className="search-input" type="search"
                 value={query}
-
-                //! if theres time: check debounce in react 
                 //! https://www.developerway.com/posts/debouncing-in-react
                 //! https://www.npmjs.com/package/use-debounce
                 //! https://codesandbox.io/p/sandbox/x0jvqrwyq?file=%2Fsrc%2Findex.js%3A12%2C11
                 onChange={handleChange}
                 placeholder="Search for food...">
             </input>
-            <button type="submit">Search</button>
+            <button className="search-button" type="submit">Search</button>
         </form>
     )
 

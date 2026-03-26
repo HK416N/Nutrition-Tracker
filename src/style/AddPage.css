@@ -1,0 +1,30 @@
+.add-page-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 100vh;
+    padding: 40px 20px;
+    text-align: center;     
+}
+
+.search-title {
+    margin: 40px 0 10px 0;
+    font-size: 2rem;
+    color: white;
+}
+
+.food-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    width: 100%;
+    gap: 20px;
+}
+
+.last-added-msg {
+    color: #22c55e;         
+    margin-top: 15px;
+    font-weight: 600;
+}

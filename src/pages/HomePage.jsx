@@ -1,11 +1,20 @@
 import NutritionSummary from "../components/NutritionSummary";
+import "../style/HomePage.css"
 
 const HomePage = ({trackedFoods}) => {
     return (
-        <div>
-            <h2>Welcome to the Nutrition Tracker App</h2>
+        <div className="home-container">
+            <header className="hero-section">
+                <h1 className="hero-title">
+                    Fueling your <br />
+                    <span className="highlight">Obsidian Potential.</span>
+                </h1>
+                <p className="hero-subtitle">DAILY OVERVIEW</p>
+            </header>
+            <div className="dashboard-grid">
             <NutritionSummary trackedFoods={trackedFoods}></NutritionSummary>
-            <p>Click "Add Foods" to begin.</p>
+            </div>
+            <p className="muted-text">Click "Add Foods" to log your first meal.</p>
         </div>
         )
 }
