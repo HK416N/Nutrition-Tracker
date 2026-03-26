@@ -2,26 +2,25 @@
 
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router";
+import { getTrackedFood, addTrackedFood, deleteTrackedFood } from "./services/foodService";
 import NavBar from "./components/NavBar";
 import HomePage from "./pages/HomePage";
 import AddPage from "./pages/FoodSearchPage";
 import NutritionLogPage from "./pages/NutritionLogPage";
 import NotFound from "./pages/NotFound";
-import { getTrackedFood, addTrackedFood, deleteTrackedFood } from "./services/foodService";
+import EditTrackedFood from "./components/EditTrackedFoodForm";
 
 const App = () => {
 
   const [trackedFoods, setTrackedFoods] = useState([]);
-  
+
+  const fetchTrackedFoods = async () => {
+    const trackedFoodsData = await getTrackedFood();
+
+    setTrackedFoods(trackedFoodsData);
+  }
+
   useEffect(() => {
-    const fetchTrackedFoods = async () => {
-      const trackedFoodsData = await getTrackedFood();
-
-      setTrackedFoods(trackedFoodsData);
-
-      console.log(trackedFoodsData);
-    }
-
     fetchTrackedFoods();
   }, [])
 
@@ -35,7 +34,6 @@ const App = () => {
 
     const newFood = await addTrackedFood(foodItem);
     if (newFood) {
-      //use spread operator to keep old food items while adding the new tracked food
       setTrackedFoods([...trackedFoods, newFood]);
     }
   }
@@ -48,41 +46,49 @@ const App = () => {
 
   return (
     <>
-      <h1>Nutrition Tracker</h1>
       <NavBar />
+      <div className="main-layout">
 
-      <Routes>
-        <Route
-          path="/"
-          element={<HomePage />
-          }
-        />
-        {/*
+        <Routes>
+          <Route
+            path="/"
+            element={<HomePage trackedFoods={trackedFoods} />
+            }
+          />
+          {/*
         pass handleAddTrackedFood to AddPage as props where FoodCard lifts "name" state to.
         The "name" state will be handled in AddPage and lifted back up to App for it 
         to be passed as props to TrackedFoodPage 
         */}
-        <Route
-          path="/foods"
-          element={<AddPage
-            onAddTrackedFood={handleAddTrackedFood}
+          <Route
+            path="/foods"
+            element={<AddPage
+              onAddTrackedFood={handleAddTrackedFood}
+            />
+            }
           />
-          }
-        />
-        <Route
-          path="/logs"
-          element={<NutritionLogPage
-            trackedFoods={trackedFoods}
-            onDelete={handleDeleteTrackedFoods}
+          <Route
+            path="/logs"
+            element={<NutritionLogPage
+              trackedFoods={trackedFoods}
+              onDelete={handleDeleteTrackedFoods}
+            />
+            }
           />
-          }
-        />
-        <Route
-          path="*"
-          element={<NotFound />
-          }
-        />
-      </Routes>
+          <Route
+            path="/edit/:trackedFoodId"
+            element={<EditTrackedFood
+              onEdit={fetchTrackedFoods} />
+            }
+          />
+          <Route
+            path="*"
+            element={<NotFound />
+            }
+          />
+
+        </Routes>
+      </div>
     </>
   )
 };

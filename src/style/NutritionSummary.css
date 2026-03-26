@@ -1,0 +1,80 @@
+.unified-summary-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 40px;
+    width: 100%;
+    max-width: 600px; 
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+.main-calories {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 10px 0;
+    color: white;
+}
+
+.divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 30px 0;
+}
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.accent-bar {
+    height: 4px;
+    width: 30px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+}
+
+.accent-bar.carbs { background: #4fd1ed; }
+.accent-bar.protein { background: #22c55e; }
+.accent-bar.fats { background: #facc15; }
+
+.label {
+    color: #94a3b8;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 5px;
+}
+
+.click-prompt {
+    margin-top: 30px;
+    font-size: 0.85rem;
+    color: #64748b;
+}
+
+.macros-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1; /* This ensures equal spacing */
+}
