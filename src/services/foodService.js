@@ -112,42 +112,6 @@ export const addTrackedFood = async (foodItem) => {
   }
 }
 
-
-//!createPet example
-// export async function createPet(pet) {
-//   const url = "https://api.airtable.com/v0/appqu0bmXr7L70dI2/pets";
-//   const data = {
-//     fields: pet, // { ...pet, age: Number(pet.age) }, // { name: "example", breed: "bbb", age: 10 },
-//   };
-//   // data.fields.age = Number(data.fields.age);
-//   const options = {
-//     method: "POST",
-//     headers: {
-//       authorization: `Bearer ${TOKEN}`,
-//       "content-type": "application/json",
-//     },
-//     body: JSON.stringify(data),
-//
-
-//   try {
-//     const response = await fetch(url, options);
-//     if (!response.ok) {
-//       throw new Error(`Response status: ${response.status}`);
-//     }
-
-//     const result = await response.json();
-//     // console.log(result);
-//     return result;
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// }
-
-
-
-
-
-
 //? DELETE Tracked Foods
 
 export const deleteTrackedFood = async (timestamp) => {
@@ -171,43 +135,7 @@ export const deleteTrackedFood = async (timestamp) => {
     
 }
 
-
-//! deletePet example
-// export async function deletePet(petId) {
-//   // const petId = "rec23AmVDNGCfOUEk";
-//   const url = `https://api.airtable.com/v0/appqu0bmXr7L70dI2/pets/${petId}`;
-//   try {
-//     const response = await fetch(url, {
-//       method: "DELETE",
-//       headers: {
-//         authorization: `Bearer ${TOKEN}`,
-//         "content-type": "application/json",
-//       },
-//     });
-//     if (!response.ok) {
-//       throw new Error(`Response status: ${response.status}`);
-//     }
-
-//     const result = await response.json();
-//     // console.log(result);
-//     return result;
-//   } catch (error) {
-//     console.error(error.message);
-//   }
-// }
-
-
-
-
-
-
 //? Food Search
-
-// export const getFoodSearch = async (query) => { //remember to add await
-    
-//     return exampleData.products; //pass exammple data from exampleData.js to FoodCard for testing
-// }
-
 
 // //https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
 export const getFoodSearch = async (query) => {
@@ -217,7 +145,6 @@ export const getFoodSearch = async (query) => {
       {
       method: 'GET',
       headers: {
-        //gemini suggestion to have header here - my fetch request is being blocked by open food facts api
         'User-Agent': 'NutritionTrackerApp/1.0 (hansdarrelkoh@gmail.com)',
         'Accept': 'application/json'
       }
@@ -237,6 +164,3 @@ export const getFoodSearch = async (query) => {
 
 
 //! temp
-console.log("All Env Vars:", import.meta.env);
-console.log("Specific Airtable URL:", import.meta.env.VITE_AIRTABLE_BASE_URL);
-console.log("Specific openfoodfacts URL:", import.meta.env.VITE_FOOD_SEARCH_BASE_URL);
